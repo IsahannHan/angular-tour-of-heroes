@@ -1,8 +1,13 @@
 /* AppComponent's private CSS styles */
+.title{
+  text-align: center;
+  vertical-align: middle;
+}
 h1 {
   font-size: 1.2em;
   margin-bottom: 0;
 }
+
 h2 {
   font-size: 2em;
   margin-top: 0;
