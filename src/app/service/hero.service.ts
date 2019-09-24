@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Hero } from '../class/hero';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -17,7 +18,9 @@ export class HeroService {
     )
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) {
+  constructor(private messageService: MessageService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar) {
   }
 
   // Methods
@@ -25,7 +28,7 @@ export class HeroService {
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesURL, hero, this.httpOptions)
     .pipe(
-      tap((newHero: Hero) => this.log(`Added hero with id ${newHero.id}`)),
+      tap((newHero: Hero) => this.log(`Added hero with id ${newHero.id}`, 'Close', 2)),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
@@ -33,7 +36,7 @@ export class HeroService {
   updateHero(hero: Hero): Observable<any> {
     return this.http.put(this.heroesURL, hero, this.httpOptions)
     .pipe(
-      tap(_ => this.log(`Updated hero with id ${hero.id}`)),
+      tap(_ => this.log(`Updated hero with id ${hero.id}`, 'Close', 2)),
       catchError(this.handleError<any>('updateHero'))
     );
   }
@@ -44,7 +47,7 @@ export class HeroService {
 
     return this.http.delete<Hero>(url, this.httpOptions)
     .pipe(
-      tap(_ => this.log(`Deleted hero with id ${id}`)),
+      tap(_ => this.log(`Deleted hero with id ${id}`, 'Close', 2)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
   }
@@ -52,18 +55,16 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesURL)
     .pipe(
-      tap(_ => this.log('Fetched heroes')),
+      tap(heroes => this.log(`Fetched ${heroes.length} heroes`, 'Close', 2)),
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
   }
 
   getHero(id: number): Observable<Hero> {
-    // this.messageService.add(`HeroService fetched hero with id=${id} successfully.`);
-    // return of(HEROES.find(hero => hero.id === id));
     const url = `${this.heroesURL}/${id}`;
     return this.http.get<Hero>(url)
     .pipe(
-      tap(_ => this.log(`Fetched hero with id ${id}`)),
+      tap(_ => this.log(`Fetched hero with id ${id}`, 'Close', 2)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
@@ -75,7 +76,7 @@ export class HeroService {
        map(heroes => heroes[0]), // returns a {0|1} element array
        tap(h => {
          const outcome = h ? `fetched` : `did not find`;
-         this.log(`${outcome} hero id=${id}`);
+         this.log(`${outcome} hero id=${id}`, 'Close', 2);
        }),
        catchError(this.handleError<Hero>(`getHero id=${id}`))
      );
@@ -88,15 +89,17 @@ export class HeroService {
 
     return this.http.get<Hero[]>(`${this.heroesURL}/?name=${term}`)
     .pipe(
-      tap(_ => this.log(`Found heroes matching "${term}"`)),
+      tap(_ => this.log(`Found heroes matching "${term}"`, 'Close', 2)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     )
   }
 
   // Helpers
 
-  private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+  private log(message: string, action: string, duration: number) {
+    this.snackBar.open(message, action, {
+      duration: duration * 1000
+    });
   }
 
   /**
@@ -112,7 +115,7 @@ export class HeroService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      this.log(`${operation} failed: ${error.message}`, 'Close', 2);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
