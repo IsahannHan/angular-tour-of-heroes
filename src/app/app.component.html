@@ -4,7 +4,7 @@
     <mat-icon>{{sidenavToggleIcon}}</mat-icon>
   </button>
 </mat-toolbar>
-<mat-sidenav-container>
+<mat-sidenav-container style="height: calc(100% - 64px)">
   <mat-sidenav #sidenav mode="side" opened>
     <mat-list>
       <mat-list-item>
@@ -23,6 +23,5 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
-    <app-messages></app-messages>
   </mat-sidenav-content>
 </mat-sidenav-container>

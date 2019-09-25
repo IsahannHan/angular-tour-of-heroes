@@ -1,5 +1,5 @@
 /* HeroesComponent's private CSS styles */
-.heroes {
+/* .heroes {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
@@ -70,4 +70,16 @@ button.delete {
   top: -32px;
   background-color: red !important;
   color: white;
+} */
+.d-hero-table{
+  text-align: -webkit-center;
+  height: 70%
+}
+
+.d-hero-table table{
+  margin: 1em 1em;
+}
+
+.d-hero-table table, mat-paginator{
+  width: 70%;
 }
