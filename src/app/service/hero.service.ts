@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../class/hero';
 import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -18,8 +17,7 @@ export class HeroService {
     )
   }
 
-  constructor(private messageService: MessageService,
-    private http: HttpClient,
+  constructor(private http: HttpClient,
     private snackBar: MatSnackBar) {
   }
 

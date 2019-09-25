@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MessageService } from '../service/message.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,9 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent{
-  durationInSeconds = 5;
-  message: string = '';
 
-  constructor(public messageService: MessageService, private _snackBar: MatSnackBar) { }
+  constructor() { }
 
 }
