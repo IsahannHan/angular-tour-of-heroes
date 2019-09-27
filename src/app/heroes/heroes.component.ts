@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Hero } from '../class/hero'
 import { HeroService } from '../service/hero.service';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -11,9 +11,12 @@ export class HeroesComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true})
   paginator: MatPaginator;
-  columnsToDisplay: string[] = ['heroId', 'heroName', 'actions'];
+  @ViewChild(MatSort, {static: true})
+  sort: MatSort;
 
-  heroes = new MatTableDataSource<Hero>();
+  columnsToDisplay: string[] = ['id', 'name', 'actions'];
+
+  heroesList = new MatTableDataSource<Hero>();
 
   // Constructor/Init
   constructor(private heroService: HeroService) {
@@ -21,7 +24,9 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.heroes.paginator = this.paginator;
+    this.heroesList.sort = this.sort;
+    this.heroesList.paginator = this.paginator;
+
     this.getHeroes();
   }
 
@@ -30,8 +35,12 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
     .subscribe(
-      (heroes: Hero[]) => this.heroes.data = heroes
+      (heroes: Hero[]) => this.heroesList.data = heroes
     );
+  }
+
+  applyFilter(filterValue: string) {
+    this.heroesList.filter = filterValue.trim().toLowerCase();
   }
 
   add(name: string): void {
@@ -43,13 +52,13 @@ export class HeroesComponent implements OnInit {
     this.heroService.addHero({name} as Hero)
     .subscribe(
       (hero: Hero) => {
-      this.heroes.data.push(hero);
-      this.heroes._updateChangeSubscription();
+      this.heroesList.data.push(hero);
+      this.heroesList._updateChangeSubscription();
     });
   }
 
   delete(hero: Hero): void {
-    this.heroes.data = this.heroes.data.filter(h => h !== hero);
+    this.heroesList.data = this.heroesList.data.filter(h => h !== hero);
     this.heroService.deleteHero(hero).subscribe();
   }
 
