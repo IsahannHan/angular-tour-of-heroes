@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Hero } from '../../models/hero';
 import { HeroService } from '../../service/hero.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-hero-detail',
@@ -10,6 +11,10 @@ import { HeroService } from '../../service/hero.service';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
+
+  heroFormControl = new FormControl('', [
+    Validators.required
+  ])
 
   @Input() hero: Hero;
 
@@ -33,7 +38,7 @@ export class HeroDetailComponent implements OnInit {
       this.hero = new Hero;
     }
   }
-  
+
   save(): void {
     if (this.hero.id !== undefined) {
       this.heroService.updateHero(this.hero)

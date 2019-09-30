@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroesComponent } from './heroes.component';
@@ -19,6 +19,7 @@ import { HeroesRoutingModule } from './heroes-routing.module';
   imports: [
     CommonModule,
     HeroesRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     AppRoutingModule,

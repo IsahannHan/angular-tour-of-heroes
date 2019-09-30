@@ -11,7 +11,7 @@ import { DashboardComponent } from './heroes/dashboard/dashboard.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './service/in-memory-data.service';
+import { InMemoryDataService } from './service/in-memory-data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
@@ -25,7 +25,6 @@ import { MaterialModule } from './material.module';
   imports: [
     BrowserModule,
     HeroesModule,
-    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
