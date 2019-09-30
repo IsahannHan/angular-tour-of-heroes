@@ -7,12 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { HeroesModule } from './heroes/heroes.module';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './heroes/dashboard/dashboard.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './service/in-memory-data.service';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
@@ -21,8 +20,7 @@ import { MaterialModule } from './material.module';
   declarations: [
     AppComponent,
     MessagesComponent,
-    DashboardComponent,
-    HeroSearchComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
