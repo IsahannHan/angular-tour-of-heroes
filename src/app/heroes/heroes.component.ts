@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Hero } from '../class/hero'
+import { Hero } from '../models/hero'
 import { HeroService } from '../service/hero.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 @Component({

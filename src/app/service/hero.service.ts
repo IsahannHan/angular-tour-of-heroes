@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hero } from '../class/hero';
+import { Hero } from '../models/hero';
 import { Observable, of } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -57,7 +57,7 @@ export class HeroService {
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
   }
-
+  
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesURL}/${id}`;
     return this.http.get<Hero>(url)
