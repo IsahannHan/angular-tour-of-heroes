@@ -7,13 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent{
   title = 'Tour of Heroes';
-  sidenavToggleIcon = 'arrow_left';
-
-  changeSidenavToggleIcon(){
-    if(this.sidenavToggleIcon === 'arrow_left'){
-      this.sidenavToggleIcon = 'arrow_right';
-    }else{
-      this.sidenavToggleIcon = 'arrow_left';
-    }
-  }
 }

@@ -1,10 +1,8 @@
 /* HeroDetailComponent's private CSS styles */
 mat-card{
-  background-color: white;
+  width: 50%;
+  margin: 2em;
 }
 mat-form-field{
   margin: 10px 5px 10px 5px;
-}
-.card{
-  width: 50%;
 }
