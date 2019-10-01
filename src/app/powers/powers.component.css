@@ -1,0 +1,21 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  mat-card{
+    margin: 20px;
+  }
+  
+  .d-power-table{
+    text-align: -webkit-center;
+    height: 70%
+  }
+  
+  .d-power-table table{
+    margin: 5px 5px;
+  }
+  
+  .d-power-table table, mat-paginator, mat-form-field{
+    width: 70%;
+  }
+  

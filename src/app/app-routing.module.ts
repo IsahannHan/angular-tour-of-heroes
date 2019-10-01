@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'heroes', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'heroes',
     loadChildren: () => import('./heroes/heroes.module').then(mod => mod.HeroesModule)
   },
   {
     path: 'powers',
-    loadChildren: () => import('./powers/powers.module').then(m => m.PowersModule)
+    loadChildren: () => import('./powers/powers.module').then(mod => mod.PowersModule)
   }
 ];
 

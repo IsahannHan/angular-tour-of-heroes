@@ -1,1 +1,60 @@
-<p>powers works!</p>
+<mat-card>
+    <mat-toolbar>
+      <span>Powers</span>
+      <span class="spacer"></span>
+      <button mat-icon-button matTooltip="Create a new power" routerLink="/powerdetail/0" routerLinkActive="active">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="d-power-table">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+  
+      <table mat-table [dataSource]="powersList" matSort class="mat-elevation-z2">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Power ID </th>
+          <td mat-cell *matCellDef="let power"> {{power.id}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Description </th>
+          <td mat-cell *matCellDef="let power"> {{power.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+          <td mat-cell *matCellDef="let power"> {{power.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration (s) </th>
+          <td mat-cell *matCellDef="let power"> {{power.duration}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let power">
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item routerLink="/powerdetail/{{power.id}}" routerLinkActive="active">
+                <mat-icon>edit</mat-icon>
+                <span>Edit power</span>
+              </button>
+              <button mat-menu-item (click)="delete(power)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete power</span>
+              </button>
+            </mat-menu>
+            <button mat-stroked-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons class="mat-elevation-z2"></mat-paginator>
+    </div>
+  </mat-card>
+  
